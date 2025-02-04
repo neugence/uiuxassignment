@@ -40,7 +40,7 @@ function SortableCard({ task, onEdit, isEditing, editProps, onOpenEditModal }: {
   
     return (
       <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-        <Card className="bg-white shadow-sm">
+        <Card className=" shadow-sm">
           <CardHeader className="p-3 pb-0">
             <div className="flex justify-between items-start">
               <div className="flex-1">

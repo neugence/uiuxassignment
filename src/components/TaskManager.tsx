@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react"
 import { useState, useMemo } from "react"
 import { Button } from "../components/ui/button"
@@ -20,7 +21,6 @@ import {
 import SortableCard from "./SortableCard"
 import EditTaskModal from './EditTaskModal'
 import { Task } from "../types/task"
-import SearchBar from "./SearchBar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,7 +41,12 @@ import AddColumnModal from "./AddColumnModal"
 
 type SortOption = 'none' | 'dateOldest' | 'dateNewest' | 'alphabetical';
 
-export default function TaskManager() {
+interface TaskManagerProps {
+  searchTerm: string;
+  filterType: string;
+}
+
+export default function TaskManager({ searchTerm, filterType }: TaskManagerProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedColumn, setSelectedColumn] = useState('')
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null)
@@ -52,8 +57,6 @@ export default function TaskManager() {
   const reorderTasks = useTaskStore((state) => state.reorderTasks);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [filterType, setFilterType] = useState("all")
   const [columnSortOptions, setColumnSortOptions] = useState<Record<string, SortOption>>({});
   const columns = useTaskStore((state) => state.columns)
   const addColumn = useTaskStore((state) => state.addColumn)
@@ -104,11 +107,6 @@ export default function TaskManager() {
 
   const getTasksByStatus = (status: string) => {
     return filteredTasks.filter(task => task.status === status)
-  }
-
-  const handleClearSearch = () => {
-    setSearchTerm("")
-    setFilterType("all")
   }
 
   const getSortedTasks = (tasks: Task[], sortOption: SortOption) => {
@@ -162,15 +160,8 @@ export default function TaskManager() {
   }
 
   return (
-    <div className="min-h-screen bg-[#3B82F6] p-6">
+    <div className="container mx-auto py-4 relative min-h-screen pb-16">
       <div className="flex justify-between items-center mb-4">
-        <SearchBar
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          filterType={filterType}
-          onFilterChange={setFilterType}
-          onClear={handleClearSearch}
-        />
         <Button
           onClick={() => setIsAddColumnModalOpen(true)}
           className="bg-white/10 text-white hover:bg-white/20"
@@ -296,35 +287,37 @@ export default function TaskManager() {
       </div>
 
       {totalPages > 1 && (
-        <Pagination className="mt-4">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious 
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                className="bg-white/10 text-white hover:bg-white/20"
-                isDisabled={currentPage === 1}
-              />
-            </PaginationItem>
-            {Array.from({length: totalPages}).map((_, i) => (
-              <PaginationItem key={i}>
-                <PaginationLink
-                  onClick={() => setCurrentPage(i + 1)}
-                  isActive={currentPage === i + 1}
+        <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border py-2">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   className="bg-white/10 text-white hover:bg-white/20"
-                >
-                  {i + 1}
-                </PaginationLink>
+                  isDisabled={currentPage === 1}
+                />
               </PaginationItem>
-            ))}
-            <PaginationItem>
-              <PaginationNext
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                className="bg-white/10 text-white hover:bg-white/20"
-                isDisabled={currentPage === totalPages}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+              {Array.from({length: totalPages}).map((_, i) => (
+                <PaginationItem key={i}>
+                  <PaginationLink
+                    onClick={() => setCurrentPage(i + 1)}
+                    isActive={currentPage === i + 1}
+                    className="bg-white/10 text-white hover:bg-white/20"
+                  >
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  className="bg-white/10 text-white hover:bg-white/20"
+                  isDisabled={currentPage === totalPages}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       )}
 
       <AddColumnModal

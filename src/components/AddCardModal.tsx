@@ -26,21 +26,38 @@ const AddCardModal: React.FC<AddCardModalProps> = ({isModalOpen, setIsModalOpen,
     title: '',
     startDate: '',
     endDate: '',
+    tags: [] as string[],
+    comments: 0,
+    views: 0,
+    assignee: '/placeholder.svg?height=32&width=32',
   })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     
     const newTask = {
-      id: Date.now().toString(), // Simple way to generate unique id
+      id: Date.now().toString(),
       title: formData.title,
       status: columnId,
-      date: formData.startDate, // You can format this better if needed
-      assignee: '/placeholder.svg?height=32&width=32', // Default assignee
+      startDate: formData.startDate,
+      endDate: formData.endDate,
+      dateCreated: new Date().toISOString().split('T')[0],
+      tags: formData.tags,
+      comments: formData.comments,
+      views: formData.views,
+      assignee: formData.assignee,
     }
 
     addTask(newTask)
-    setFormData({ title: '', startDate: '', endDate: '' }) // Reset form
+    setFormData({ 
+      title: '', 
+      startDate: '', 
+      endDate: '', 
+      tags: [],
+      comments: 0,
+      views: 0,
+      assignee: '/placeholder.svg?height=32&width=32'
+    })
     setIsModalOpen(false)
   }
 
@@ -85,7 +102,7 @@ const AddCardModal: React.FC<AddCardModalProps> = ({isModalOpen, setIsModalOpen,
           </div>
           <div className="grid gap-2">
             <label>Status</label>
-            <div className="p-2 bg-gray-100 rounded-md text-sm">
+            <div className="p-2 rounded-md text-sm">
               {COLUMN_NAMES[columnId as keyof typeof COLUMN_NAMES]}
             </div>
           </div>
@@ -105,7 +122,34 @@ const AddCardModal: React.FC<AddCardModalProps> = ({isModalOpen, setIsModalOpen,
               name="endDate"
               value={formData.endDate}
               onChange={handleChange}
+              required
             />
+          </div>
+          <div className="grid gap-2">
+            <label>Tags</label>
+            <div className="flex gap-2">
+              {['purple', 'blue', 'green', 'red'].map(tag => (
+                <Button
+                  key={tag}
+                  type="button"
+                  variant={formData.tags.includes(tag) ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => {
+                    setFormData(prev => ({
+                      ...prev,
+                      tags: prev.tags.includes(tag) 
+                        ? prev.tags.filter(t => t !== tag)
+                        : [...prev.tags, tag]
+                    }))
+                  }}
+                  className={`h-6 w-6 p-0 !bg-${tag}-500 ${
+                    formData.tags.includes(tag) 
+                      ? 'text-white ring-2 ring-${tag}-500 ring-offset-2 opacity-100' 
+                      : 'opacity-40 hover:opacity-70'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
           <div className="flex justify-end gap-2 mt-4">
             <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>

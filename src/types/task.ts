@@ -7,10 +7,10 @@ export interface Task {
     views?: number;
     comments?: number;
     date?: string;
+    startDate?: string;
+    endDate?: string;
+    dateCreated: string;
     badge?: string;
     assignee?: string;
     assignees?: string[];
-    startDate?: string;
-    endDate?: string;
-    dateCreated?: any;
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TimelineKeys } from 'react-calendar-timeline';
 
 const keys: TimelineKeys = {

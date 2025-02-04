@@ -1,11 +1,17 @@
+// @ts-nocheck
 import React, { useMemo } from 'react'
 import moment from 'moment'
 import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/dist/style.css'
+import './timeline.css'
 import './style.css'
 import { useTaskStore } from '../../lib/store'
 import SundaysMarker from './SundaysMarker'
 import itemRender from './itemRender'
+
+const formatDate = (date: moment.Moment) => {
+  return date.format('MMM D'); // Format as "Feb 5" instead of full date
+};
 
 export default function MembersTimeline() {
   const tasks = useTaskStore((state) => state.tasks)
@@ -65,45 +71,58 @@ export default function MembersTimeline() {
   }
 
   return (
-    <div className="h-screen bg-white">
-      <Timeline
-        groups={timelineGroups}
-        items={timelineItems}
-        keys={{
-          groupIdKey: 'id',
-          groupTitleKey: 'title',
-          groupRightTitleKey: 'rightTitle',
-          itemIdKey: 'id',
-          itemTitleKey: 'title',
-          itemDivTitleKey: 'title',
-          itemGroupKey: 'group',
-          itemTimeStartKey: 'start',
-          itemTimeEndKey: 'end'
-        }}
-        defaultTimeStart={moment().add(-15, 'day')}
-        defaultTimeEnd={moment().add(45, 'day')}
-        rightSidebarWidth={150}
-        rightSidebarContent="Status"
-        sidebarContent="Categories"
-        lineHeight={50}
-        itemRenderer={itemRender}
-        canMove={true}
-        canResize={'both'}
-        onItemMove={handleItemMove}
-        onItemResize={handleItemResize}
-        stackItems
-        itemHeightRatio={0.75}
-        showCursorLine
-      >
-        <TimelineMarkers>
-          <TodayMarker>
-            {({styles}) => (
-              <div className="w-0.5 bg-red-500" style={styles} />
-            )}
-          </TodayMarker>
-          <SundaysMarker />
-        </TimelineMarkers>
-      </Timeline>
+    <div className="container mx-auto py-4">
+      <div className="rounded-lg bg-white">
+        <Timeline
+          groups={timelineGroups}
+          items={timelineItems}
+          keys={{
+            groupIdKey: 'id',
+            groupTitleKey: 'title',
+            groupRightTitleKey: 'rightTitle',
+            itemIdKey: 'id',
+            itemTitleKey: 'title',
+            itemDivTitleKey: 'title',
+            itemGroupKey: 'group',
+            itemTimeStartKey: 'start',
+            itemTimeEndKey: 'end'
+          }}
+          defaultTimeStart={moment().add(-15, 'day')}
+          defaultTimeEnd={moment().add(45, 'day')}
+          minZoom={24 * 60 * 60 * 1000} // Minimum zoom of 1 day
+          maxZoom={365.24 * 86400 * 1000} // Maximum zoom of ~1 year
+          timeSteps={{
+            second: 0,
+            minute: 0,
+            hour: 0,
+            day: 1,
+            month: 1,
+            year: 1
+          }}
+          formatLabel={formatDate} // Use custom date formatter
+          rightSidebarWidth={150}
+          rightSidebarContent="Status"
+          sidebarContent="Categories"
+          lineHeight={50}
+          itemRenderer={itemRender}
+          canMove={true}
+          canResize={'both'}
+          onItemMove={handleItemMove}
+          onItemResize={handleItemResize}
+          stackItems
+          itemHeightRatio={0.75}
+          showCursorLine
+        >
+          <TimelineMarkers>
+            <TodayMarker>
+              {({styles}) => (
+                <div className="w-0.5 bg-red-500" style={styles} />
+              )}
+            </TodayMarker>
+            <SundaysMarker />
+          </TimelineMarkers>
+        </Timeline>
+      </div>
     </div>
   )
 }

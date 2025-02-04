@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { Task } from '../types/task';
 import { tasks } from '../constants/hardCodedTasks';
 import { arrayMove } from '@dnd-kit/sortable';
+import zukeeper from 'zukeeper';
 
 interface Column {
   id: string;
@@ -27,7 +28,14 @@ const generateColumnId = (title: string): string => {
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
 }
 
-export const useTaskStore = create<TaskState>((set) => ({
+// Add type declaration for window
+declare global {
+  interface Window {
+    store: ReturnType<typeof useTaskStore>;
+  }
+}
+
+export const useTaskStore = create(zukeeper((set) => ({
   tasks: tasks,
   addTask: (task) => 
     set((state) => ({ tasks: [...state.tasks, task] })),
@@ -79,4 +87,7 @@ export const useTaskStore = create<TaskState>((set) => ({
         id: generateColumnId(column.title) // Use title-based ID instead of timestamp
       }]
     })),
-}));
+})));
+
+// Make the store available on the window object for Zukeeper
+window.store = useTaskStore;
