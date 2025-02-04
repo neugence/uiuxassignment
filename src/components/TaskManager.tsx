@@ -2,7 +2,7 @@
 import React from "react"
 import { useState, useMemo } from "react"
 import { Button } from "../components/ui/button"
-import { MoreHorizontal, Plus } from "lucide-react"
+import { MoreHorizontal, Plus, Trash2 } from "lucide-react"
 import { useTaskStore } from "../lib/store"
 import AddCardModal from "./AddCardModal"
 import {
@@ -63,6 +63,8 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
   const [currentPage, setCurrentPage] = useState(1)
   const columnsPerPage = 3
   const [isAddColumnModalOpen, setIsAddColumnModalOpen] = useState(false)
+  const deleteTask = useTaskStore((state) => state.deleteTask);
+  const deleteColumn = useTaskStore((state) => state.deleteColumn);
   
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -159,6 +161,23 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
     })
   }
 
+  const handleDeleteTask = (taskId: string) => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      deleteTask(taskId);
+    }
+  };
+
+  const handleDeleteColumn = (columnId: string) => {
+    if (columnId === 'general-info') {
+      alert("The General Information column cannot be deleted");
+      return;
+    }
+
+    if (window.confirm('Are you sure you want to delete this column? All tasks in this column will also be deleted.')) {
+      deleteColumn(columnId);
+    }
+  };
+
   return (
     <div className="container mx-auto py-4 relative min-h-screen pb-16">
       <div className="flex justify-between items-center mb-4">
@@ -217,6 +236,15 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
                         >
                           Card name (alphabetically)
                         </DropdownMenuItem>
+                        {column.id !== 'general-info' && (
+                          <DropdownMenuItem
+                            onClick={() => handleDeleteColumn(column.id)}
+                            className="text-red-600 focus:text-red-600"
+                          >
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Delete Column
+                          </DropdownMenuItem>
+                        )}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -256,6 +284,7 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
                               setSelectedTask(task);
                               setIsEditModalOpen(true);
                             }}
+                            onDelete={() => handleDeleteTask(task.id)}
                           />
                         ))}
                       </SortableContext>

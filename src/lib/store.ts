@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { Task } from '../types/task';
 import { tasks } from '../constants/hardCodedTasks';
 import { arrayMove } from '@dnd-kit/sortable';
-import zukeeper from 'zukeeper';
 
 interface Column {
   id: string;
@@ -16,8 +15,10 @@ interface TaskState {
   updateTaskTitle: (taskId: string, newTitle: string) => void;
   reorderTasks: (activeId: string, overId: string) => void;
   updateTask: (taskId: string, updatedTask: Task) => void;
+  deleteTask: (taskId: string) => void;
   columns: Column[];
   addColumn: (column: Column) => void;
+  deleteColumn: (columnId: string) => void;
 }
 
 // Add a new utility function to generate a clean column ID
@@ -28,33 +29,26 @@ const generateColumnId = (title: string): string => {
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
 }
 
-// Add type declaration for window
-declare global {
-  interface Window {
-    store: ReturnType<typeof useTaskStore>;
-  }
-}
-
-export const useTaskStore = create(zukeeper((set) => ({
+export const useTaskStore = create<TaskState>((set) => ({
   tasks: tasks,
-  addTask: (task) => 
-    set((state) => ({ tasks: [...state.tasks, task] })),
-  updateTaskStatus: (taskId, newStatus) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+  addTask: (task: Task) => 
+    set((state: TaskState) => ({ tasks: [...state.tasks, task] })),
+  updateTaskStatus: (taskId: string, newStatus: string) =>
+    set((state: TaskState) => ({
+      tasks: state.tasks.map((task: Task) =>
         task.id === taskId ? { ...task, status: newStatus } : task
       ),
     })),
-  updateTaskTitle: (taskId, newTitle) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+  updateTaskTitle: (taskId: string, newTitle: string) =>
+    set((state: TaskState) => ({
+      tasks: state.tasks.map((task: Task) =>
         task.id === taskId ? { ...task, title: newTitle } : task
       ),
     })),
-  reorderTasks: (activeId, overId) =>
-    set((state) => {
-      const oldIndex = state.tasks.findIndex((task) => task.id === activeId);
-      const newIndex = state.tasks.findIndex((task) => task.id === overId);
+  reorderTasks: (activeId: string, overId: string) =>
+    set((state: TaskState) => {
+      const oldIndex = state.tasks.findIndex((task: Task) => task.id === activeId);
+      const newIndex = state.tasks.findIndex((task: Task) => task.id === overId);
       
       if (oldIndex === -1 || newIndex === -1) return state;
       
@@ -67,11 +61,15 @@ export const useTaskStore = create(zukeeper((set) => ({
         tasks: arrayMove(state.tasks, oldIndex, newIndex),
       };
     }),
-  updateTask: (taskId, updatedTask) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+  updateTask: (taskId: string, updatedTask: Task) =>
+    set((state: TaskState) => ({
+      tasks: state.tasks.map((task: Task) =>
         task.id === taskId ? updatedTask : task
       ),
+    })),
+  deleteTask: (taskId: string) =>
+    set((state: TaskState) => ({
+      tasks: state.tasks.filter((task: Task) => task.id !== taskId),
     })),
   columns: [
     { id: 'general-info', title: 'General Information' },
@@ -80,14 +78,16 @@ export const useTaskStore = create(zukeeper((set) => ({
     { id: 'paused', title: 'Paused' },
     { id: 'completed', title: 'Ready for Launch' },
   ],
-  addColumn: (column) =>
-    set((state) => ({
+  addColumn: (column: Column) =>
+    set((state: TaskState) => ({
       columns: [...state.columns, {
         ...column,
-        id: generateColumnId(column.title) // Use title-based ID instead of timestamp
+        id: generateColumnId(column.title)
       }]
     })),
-})));
-
-// Make the store available on the window object for Zukeeper
-window.store = useTaskStore;
+  deleteColumn: (columnId: string) =>
+    set((state: TaskState) => ({
+      columns: state.columns.filter((column: Column) => column.id !== columnId),
+      tasks: state.tasks.filter((task: Task) => task.status !== columnId),
+    })),
+}));
