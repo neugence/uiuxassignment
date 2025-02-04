@@ -1,0 +1,67 @@
+.react-calendar-timeline {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.react-calendar-timeline * {
+  box-sizing: border-box;
+}
+
+.react-calendar-timeline .rct-outer {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.react-calendar-timeline .rct-scroll {
+  display: inline-block;
+  white-space: normal;
+  vertical-align: top;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.react-calendar-timeline .rct-item {
+  position: absolute;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
+  background: #2196F3;
+  border: 1px solid #1A6FB3;
+  z-index: 80;
+}
+
+.react-calendar-timeline .rct-header {
+  margin: 0;
+  overflow-x: hidden;
+  z-index: 90;
+}
+
+.react-calendar-timeline .rct-sidebar {
+  overflow: hidden;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  box-sizing: border-box;
+  border-right: 1px solid #bbb;
+}
+
+.react-calendar-timeline .rct-horizontal-lines {
+  position: relative;
+}
+
+.react-calendar-timeline .rct-vertical-lines {
+  position: relative;
+  background: #fff;
+}
+
+.react-calendar-timeline .rct-today {
+  position: absolute;
+  width: 2px;
+  background: red;
+  z-index: 85;
+} 

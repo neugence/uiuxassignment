@@ -1,0 +1,45 @@
+.confirm, .assign, .pending, .htmlCss, .js2, .js3, .nodejs, .mySql, .react {
+    color: #fff;
+}
+
+.confirm {
+    background-color: #4897D8 !important;
+
+}
+
+.assign {
+    background-color: #D88948 !important;
+}
+
+.pending {
+    background-color: #FA6E59 !important;
+}
+
+.htmlCss {
+    background-color: #429970 !important;
+}
+
+.js1 {
+    background-color: #FFDB5C !important;
+    color: #000;
+}
+
+.js2 {
+    background-color: #FA6E59 !important;
+}
+
+.js3 {
+    background-color: #BE59FA !important;
+}
+
+.nodejs {
+    background-color: #4897D8 !important;
+}
+
+.mySql {
+    background-color: #6d6d6d !important;
+}
+
+.react {
+    background-color: #59E5FA !important;
+}
