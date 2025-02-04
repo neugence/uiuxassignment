@@ -1,2 +1,33 @@
 .idea/
 
+# Node modules
+node_modules/
+
+# Vite build output
+dist/
+
+# Local environment variables
+.env*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Cache files
+.cache/
+*.cache
+
+# Lint and formatting
+.eslintcache
+.prettier*
+
+# TypeScript
+*.tsbuildinfo
