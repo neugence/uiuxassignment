@@ -1,77 +1,114 @@
-# Neugence UI / UX Assignment
+# Task Management System
 
-1. Fork this Repo https://github.com/neugence/uiuxassignment
-2. Complete the assignment and host the app
-3. Create a Pull request with hosted app link only (no code)
-4. We will go into the code during interview
-   * We encourage you to use AI Tools for code writing
-   * We will go deep into the code to check your knowledge
-5. Any questions (our developer will answer here), 
-   * Discord Server: https://discord.gg/mW8xvN9qjx
-   * Channel : https://discord.com/channels/1281837569373503652/1335275549429334149
+This project is a **Task Management System** built with **React and Vite**. It allows users to create, edit, and manage tasks with a modal window, track task timelines in an interactive dashboard, and efficiently filter, sort, and search through a large dataset.
 
-# Build a Smart Task Manager  
+## Features
 
-## 📌 Problem Statement  
-Your challenge is to **design and develop a fully functional Task Management System** inspired by the reference images:  
+- **Create, edit, and manage tasks** with a **modal window**.
+- **Track task timelines** in an interactive dashboard.
+- **Filter, sort, and search** through a **large dataset** efficiently.
+- **Responsive UI** for seamless user experience.
 
-- **Task Manager UI** ![image](./TaskManager.png)  
-- **Timelines Dashboard** ![image](./Members_Dashboard.png)  
+## Project Structure
 
-This application should allow users to:  
-✅ **Create, edit, and manage tasks** with a **modal window**.  
-✅ **Track task timelines** in an interactive dashboard.  
-✅ **Filter, sort, and search** through a **large dataset** efficiently.  
-✅ Ensure **seamless user experience** with a **modern, responsive UI**.  
+```
+frontend/
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── public/
+├── README.md
+├── src/
+│   ├── App.jsx
+│   ├── assets/
+│   ├── components/
+│   │   ├── Dashboard.jsx
+│   │   └── Taskboard.jsx
+│   ├── index.css
+│   ├── main.jsx
+│   ├── redux/
+│   │   ├── store.js
+│   │   └── taskSlice.js
+├── vite.config.js
+```
 
-💡 **Bonus:** Bring your **creativity** to add **unique and valuable features**!  
+## Getting Started
 
----
+### Prerequisites
 
-## 🛠 Evaluation Criteria  
-A **flawlessly working** application is the **ideal goal**, but **innovation** and **thoughtful improvements** will set you apart!  
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
 
-We will assess your work based on:  
-✔️ **Functional Completion** – Does the app work as expected?  
-✔️ **Code Readability & Maintainability** – Clean, well-structured, and scalable code.  
-✔️ **Performance Optimization** – Efficient rendering with minimal re-renders.  
-✔️ **UI/UX Excellence** – A visually appealing and accessible design.  
-✔️ **Debugging & Problem-Solving** – Effective handling of errors and edge cases.  
+### Installation
 
----
+1. **Clone the repository:**
 
-## 🧩 Task Breakdown  
+   ```sh
+   git clone https://github.com/your-username/task-management-system.git
+   cd task-management-system/frontend
+   ```
 
-### 1️⃣ React Challenge  
-🔹 **State Management**: Use **Zustand** for managing task data.  
-🔹 **React Hooks**: Implement `useState`, `useEffect`, `useMemo`, and `useCallback` **effectively**.  
-🔹 **Prop Drilling**: Structure components with a clear data flow.  
-🔹 **Pagination**: Implement pagination for a dataset of **at least 50 records**.  
-🔹 **Filters & Sorting**: Allow users to filter and sort tasks dynamically.  
-🔹 **Click-to-Edit Fields**: Enable inline task editing, saving data in **state**.  
-🔹 **Drag & Drop (useRef)**: Allow users to **reorder** tasks in the list via **drag & drop**.  
-🔹 **Modal Window**:  
-   - Used for **adding and editing tasks**.  
-   - Should close on **Escape key** and **outside click**.  
+2. **Install dependencies:**
 
-💡 **Bonus Features:**  
-⭐ **Map Data Efficiently** – Store task data using a **map structure**, with **email ID as the key**.  
-⭐ **Optimized Rendering** – Use **`useMemo`** and **`useCallback`** to minimize unnecessary re-renders.  
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
 
----
+### Running the Development Server
 
-### 2️⃣ Data Structures & Performance  
-🔹 **Efficient Mapping** – Handle large datasets effectively.  
-🔹 **Optimize Component Rendering** – Use **memoization** where necessary.  
+To start the development server, run:
 
----
+```sh
+npm run dev
+# or
+yarn dev
+```
 
-### 3️⃣ APIs & Database  
-🔹 **Debugging & Error Handling** – Ensure robust logging and graceful error handling.  
+### Building for Production
 
----
+To build the project for production, run:
 
-## 🎨 Why This Challenge?  
-This problem **mimics real-world UI/UX projects**, where **efficiency, interactivity, and user experience** are equally important. It will **help you grow** as a **UI/UX developer** while **showcasing your creativity**!  
+```sh
+npm run build
+# or
+yarn build
+```
 
-💡 **Get creative, keep the UI sleek, and make the app intuitive to use!** 🎨✨  
+### Linting
+
+To lint the project, run:
+
+```sh
+npm run lint
+# or
+yarn lint
+```
+
+## Usage
+
+### Taskboard
+The **Taskboard** component allows users to:
+
+- Add new tasks with a title, start date, and end date.
+- Add subtasks to existing tasks.
+- Edit and delete tasks and subtasks.
+- Search for tasks and subtasks.
+- Drag and drop tasks to reorder them.
+
+### Dashboard
+The **Dashboard** component provides a visual timeline of tasks, showing their start and end dates. It also allows users to navigate back to the **Taskboard**.
+
+## State Management
+
+The project uses **Redux Toolkit** for state management and **redux-persist** for persisting the state across sessions. The state is managed in the `src/redux` directory, with the main store configuration in `store.js` and task-related actions and reducers in `taskSlice.js`.
+
+## Contributing
+
+Contributions are welcome! Please **fork** the repository and create a **pull request** with your changes.
+
+## License
+
+This project is licensed under the **MIT License**.
