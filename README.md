@@ -1,46 +1,77 @@
-# Getting Started with Create React App
+# Neugence UI / UX Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Fork this Repo https://github.com/neugence/uiuxassignment
+2. Complete the assignment and host the app
+3. Create a Pull request with hosted app link only (no code)
+4. We will go into the code during interview
+   * We encourage you to use AI Tools for code writing
+   * We will go deep into the code to check your knowledge
+5. Any questions (our developer will answer here), 
+   * Discord Server: https://discord.gg/mW8xvN9qjx
+   * Channel : https://discord.com/channels/1281837569373503652/1335275549429334149
 
-## Available Scripts
+# Build a Smart Task Manager  
 
-In the project directory, you can run:
+## 📌 Problem Statement  
+Your challenge is to **design and develop a fully functional Task Management System** inspired by the reference images:  
 
-### `npm start`
+- **Task Manager UI** ![image](./TaskManager.png)  
+- **Timelines Dashboard** ![image](./Members_Dashboard.png)  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This application should allow users to:  
+✅ **Create, edit, and manage tasks** with a **modal window**.  
+✅ **Track task timelines** in an interactive dashboard.  
+✅ **Filter, sort, and search** through a **large dataset** efficiently.  
+✅ Ensure **seamless user experience** with a **modern, responsive UI**.  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+💡 **Bonus:** Bring your **creativity** to add **unique and valuable features**!  
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠 Evaluation Criteria  
+A **flawlessly working** application is the **ideal goal**, but **innovation** and **thoughtful improvements** will set you apart!  
 
-### `npm run build`
+We will assess your work based on:  
+✔️ **Functional Completion** – Does the app work as expected?  
+✔️ **Code Readability & Maintainability** – Clean, well-structured, and scalable code.  
+✔️ **Performance Optimization** – Efficient rendering with minimal re-renders.  
+✔️ **UI/UX Excellence** – A visually appealing and accessible design.  
+✔️ **Debugging & Problem-Solving** – Effective handling of errors and edge cases.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧩 Task Breakdown  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1️⃣ React Challenge  
+🔹 **State Management**: Use **Zustand** for managing task data.  
+🔹 **React Hooks**: Implement `useState`, `useEffect`, `useMemo`, and `useCallback` **effectively**.  
+🔹 **Prop Drilling**: Structure components with a clear data flow.  
+🔹 **Pagination**: Implement pagination for a dataset of **at least 50 records**.  
+🔹 **Filters & Sorting**: Allow users to filter and sort tasks dynamically.  
+🔹 **Click-to-Edit Fields**: Enable inline task editing, saving data in **state**.  
+🔹 **Drag & Drop (useRef)**: Allow users to **reorder** tasks in the list via **drag & drop**.  
+🔹 **Modal Window**:  
+   - Used for **adding and editing tasks**.  
+   - Should close on **Escape key** and **outside click**.  
 
-### `npm run eject`
+💡 **Bonus Features:**  
+⭐ **Map Data Efficiently** – Store task data using a **map structure**, with **email ID as the key**.  
+⭐ **Optimized Rendering** – Use **`useMemo`** and **`useCallback`** to minimize unnecessary re-renders.  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2️⃣ Data Structures & Performance  
+🔹 **Efficient Mapping** – Handle large datasets effectively.  
+🔹 **Optimize Component Rendering** – Use **memoization** where necessary.  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 3️⃣ APIs & Database  
+🔹 **Debugging & Error Handling** – Ensure robust logging and graceful error handling.  
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🎨 Why This Challenge?  
+This problem **mimics real-world UI/UX projects**, where **efficiency, interactivity, and user experience** are equally important. It will **help you grow** as a **UI/UX developer** while **showcasing your creativity**!  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+💡 **Get creative, keep the UI sleek, and make the app intuitive to use!** 🎨✨  
