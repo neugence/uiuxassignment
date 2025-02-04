@@ -20,6 +20,13 @@ const COLUMN_NAMES = {
   'general-info': 'General Information'
 }
 
+const TAG_COLORS = {
+  purple: 'bg-purple-500 hover:bg-purple-600',
+  blue: 'bg-blue-500 hover:bg-blue-600',
+  green: 'bg-green-500 hover:bg-green-600',
+  red: 'bg-red-500 hover:bg-red-600',
+} as const
+
 const AddCardModal: React.FC<AddCardModalProps> = ({isModalOpen, setIsModalOpen, columnId}) => {
   const addTask = useTaskStore((state) => state.addTask)
   const [formData, setFormData] = useState({
@@ -128,7 +135,7 @@ const AddCardModal: React.FC<AddCardModalProps> = ({isModalOpen, setIsModalOpen,
           <div className="grid gap-2">
             <label>Tags</label>
             <div className="flex gap-2">
-              {['purple', 'blue', 'green', 'red'].map(tag => (
+              {Object.entries(TAG_COLORS).map(([tag, colorClass]) => (
                 <Button
                   key={tag}
                   type="button"
@@ -142,9 +149,9 @@ const AddCardModal: React.FC<AddCardModalProps> = ({isModalOpen, setIsModalOpen,
                         : [...prev.tags, tag]
                     }))
                   }}
-                  className={`h-6 w-6 p-0 !bg-${tag}-500 ${
-                    formData.tags.includes(tag) 
-                      ? 'text-white ring-2 ring-${tag}-500 ring-offset-2 opacity-100' 
+                  className={`h-6 w-6 p-0 ${colorClass} ${
+                    formData.tags.includes(tag)
+                      ? 'text-white ring-2 ring-offset-2'
                       : 'opacity-40 hover:opacity-70'
                   }`}
                 />
