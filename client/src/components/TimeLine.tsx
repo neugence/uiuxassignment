@@ -12,7 +12,7 @@ const STATUS_COLORS = {
   default: 'bg-gray-500',
 };
 
-export default function Timeline() {
+export default function TimeLine() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const { tasks } = useTaskStore();
 
