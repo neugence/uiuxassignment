@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LayoutGrid, Calendar, BarChart2 } from 'lucide-react';
 import TaskBoard from './components/TaskBoard';
-import Timeline from './components/Timeline';
+import TimeLine from './components/TimeLine';
 import Dashboard from './components/Dashboard';
 import Layout from './components/Layout';
 
@@ -53,7 +53,7 @@ export default function App() {
 
       {view === 'dashboard' && <Dashboard />}
       {view === 'board' && <TaskBoard />}
-      {view === 'timeline' && <Timeline />}
+      {view === 'timeline' && <TimeLine />}
     </div>
   );
 
