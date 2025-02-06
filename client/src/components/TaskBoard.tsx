@@ -30,7 +30,11 @@ export default function TaskBoard() {
   const { tasks, addTask, moveTask, reorderTasks } = useTaskStore();
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -51,10 +55,12 @@ export default function TaskBoard() {
 
   const handleDragStart = useCallback((event: DragStartEvent) => {
     setActiveId(event.active.id as string);
+    document.body.style.cursor = 'grabbing';
   }, []);
 
   const handleDragEnd = useCallback((event: DragEndEvent) => {
     const { active, over } = event;
+    document.body.style.cursor = '';
     
     if (over && active.id !== over.id) {
       const activeTask = tasks.get(active.id as string);
@@ -82,24 +88,24 @@ export default function TaskBoard() {
   const activeTask = activeId ? tasks.get(activeId) : null;
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6">
-      <div className="grid grid-cols-5 gap-4">
-        {COLUMNS.map((status) => (
-          <TaskColumn
-            key={status}
-            status={status}
-            tasks={tasksByStatus.get(status) || []}
-            onAddCard={() => setIsModalOpen(true)}
-          />
-        ))}
-      </div>
-
+    <div className="bg-gray-900 rounded-lg p-6">
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
+        <div className="grid grid-cols-4 gap-4">
+          {COLUMNS.map((status) => (
+            <TaskColumn
+              key={status}
+              status={status}
+              tasks={tasksByStatus.get(status) || []}
+              onAddCard={() => setIsModalOpen(true)}
+            />
+          ))}
+        </div>
+
         <DragOverlay>
           {activeTask ? <TaskCard task={activeTask} /> : null}
         </DragOverlay>
