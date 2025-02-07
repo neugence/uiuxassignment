@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  @apply bg-gray-100;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Hide scrollbar utility class */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Container class for responsive widths */
+@layer components {
+  .container {
+    @apply mx-auto;
+    max-width: 100%;
+    @apply px-4;
+    @apply sm:px-6;
+    @apply lg:px-8;
+  }
+  
+  @screen sm {
+    .container {
+      max-width: 640px;
+    }
+  }
+  
+  @screen md {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  @screen lg {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  @screen xl {
+    .container {
+      max-width: 1280px;
+    }
+  }
+}
