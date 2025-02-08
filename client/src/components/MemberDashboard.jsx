@@ -54,6 +54,27 @@ const mockMembers = [
       },
     ],
   },
+  {
+    id: 2,
+    name: "Brad",
+    avatar: "https://i.pravatar.cc/150?img=2",
+    tasks: [
+      {
+        id: 5,
+        title: "Optimization",
+        start: "2024-03-11",
+        end: "2024-04-13",
+        color: "bg-red-100 text-red-800",
+      },
+      {
+        id: 6,
+        title: "Query checking",
+        start: "2024-03-24",
+        end: "2024-03-27",
+        color: "bg-green-100 text-green-800",
+      },
+    ],
+  },
 ];
 
 // Generate full date range

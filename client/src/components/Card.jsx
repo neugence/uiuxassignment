@@ -4,6 +4,11 @@ import { GlobalContext } from "../context/GlobalContext";
 
 const Card = ({ task }) => {
   const { openModal } = useContext(GlobalContext);
+  const priorityColors = {
+    High: "bg-red-500",
+    Medium: "bg-yellow-400",
+    Low: "bg-green-500",
+  };
   return (
     <div
       className="bg-white rounded-lg p-3 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
@@ -11,18 +16,20 @@ const Card = ({ task }) => {
         openModal(task);
       }}
     >
-      <div
-        className={`h-1.5 w-8 mb-1 rounded-full ${
-          {
-            purple: "bg-purple-500",
-            blue: "bg-blue-500",
-            cyan: "bg-cyan-500",
-            green: "bg-green-500",
-            pink: "bg-pink-500",
-            red: "bg-red-500",
-          }[task.tag] || "bg-gray-400"
-        }`}
-      />
+      <div className="flex gap-1 mb-2">
+        {task.tags?.length > 0 ? (
+          task.tags.map((tag, index) => (
+            <span
+              key={index}
+              className={`h-1.5 w-8 rounded-full ${
+                priorityColors[tag] || "bg-gray-400"
+              }`}
+            />
+          ))
+        ) : (
+          <span className="h-1.5 w-8 rounded-full bg-gray-400" />
+        )}
+      </div>
       <h3 className="font-medium text-gray-800 mb-2">{task.title}</h3>
       <div className="mb-2 pt-0">
         <p className="text-xs text-gray-500">{task.subtitle}</p>

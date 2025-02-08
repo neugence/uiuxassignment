@@ -68,7 +68,11 @@ function Modal({ task, isOpen, onClose }) {
   );
 
   if (!isOpen) return null;
-
+  const tagColors = {
+    High: "bg-red-600",
+    Medium: "bg-yellow-400",
+    Low: "bg-green-500",
+  };
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       <div className="fixed inset-0 bg-black/50" aria-hidden="true"></div>
@@ -207,17 +211,21 @@ function Modal({ task, isOpen, onClose }) {
             {/* Tags */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                Tags
+                Priority
               </label>
               <div className="flex space-x-4">
-                {["purple", "blue", "green", "red"].map((tag) => (
+                {["High", "Medium", "Low"].map((tag) => (
                   <div
                     key={tag}
                     onClick={() => toggleTag(tag)}
-                    className={`w-8 h-8 rounded-full cursor-pointer 
-                      ${formData.tags.includes(tag) ? "ring-2 ring-white" : ""}
-                      bg-${tag}-600`}
-                  ></div>
+                    className={`px-3 py-1 text-sm font-semibold rounded-md cursor-pointer text-white ${
+                      tagColors[tag]
+                    } ${
+                      formData.tags.includes(tag) ? "ring-2 ring-white" : ""
+                    }`}
+                  >
+                    {tag}
+                  </div>
                 ))}
               </div>
             </div>
