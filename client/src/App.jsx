@@ -37,7 +37,7 @@ function AppContent() {
                 </h1>
                 <div className="flex bg-gray-100 rounded-lg p-1">
                   <NavLink
-                    to="/board"
+                    to="/dashboard"
                     className={({ isActive }) =>
                       `flex items-center px-3 py-2 rounded ${
                         isActive
@@ -47,7 +47,7 @@ function AppContent() {
                     }
                   >
                     <ListTodo size={16} className="mr-1" />
-                    <span className="text-sm sm:text-base">Board</span>
+                    <span className="text-sm sm:text-base">Dash Board</span>
                   </NavLink>
                   <NavLink
                     to="/timeline"
@@ -90,8 +90,8 @@ function AppContent() {
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Routes>
-            <Route path="/" element={<Navigate to="/board" replace />} />
-            <Route path="/board" element={<Board />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<Board />} />
             <Route path="/timeline" element={<MemberDashboard />} />
             <Route path="/list" element={<TaskLists />} />
           </Routes>
