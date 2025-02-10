@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even, 
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+  @apply border-b-0;
+}
+
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even {
+  @apply bg-[#4A5568];
+}
+
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row {
+  @apply border-b-0;
+}
+
+.react-calendar-timeline .rct-header .rct-label {
+  @apply border-b-0 text-sm whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl.rct-vl-first {
+  @apply border-gray-300;
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl {
+  @apply border-l border-gray-100/50;
+}
+
+.react-calendar-timeline .rct-header .rct-label-group {
+  @apply bg-gray-200 text-black text-sm font-['Work_Sans'] whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+.react-calendar-timeline .rct-sidebar-header {
+  @apply bg-gray-200 text-black text-center pt-4 border-0 border-r-2 border-r-gray-300;
+}
