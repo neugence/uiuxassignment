@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import moment from 'moment'
 import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/dist/style.css'
@@ -22,8 +22,7 @@ export default function MembersTimeline() {
   const timelineGroups = useMemo(() => {
     return columns.map(column => ({
       id: column.id,
-      title: column.title,
-      rightTitle: column.title
+      title: column.title
     }))
   }, [columns])
 
@@ -70,16 +69,35 @@ export default function MembersTimeline() {
     })
   }
 
+  // Add responsive sidebar width
+  const [sidebarWidth, setSidebarWidth] = useState(150);
+
+  // Add window resize handler
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) { // sm breakpoint
+        setSidebarWidth(80);
+      } else if (window.innerWidth < 768) { // md breakpoint
+        setSidebarWidth(100);
+      } else {
+        setSidebarWidth(150);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className="container mx-auto py-4">
-      <div className="rounded-lg bg-white">
+    <div className="container mx-auto py-4 overflow-x-auto">
+      <div className="rounded-lg bg-white min-w-[320px]">
         <Timeline
           groups={timelineGroups}
           items={timelineItems}
           keys={{
             groupIdKey: 'id',
             groupTitleKey: 'title',
-            groupRightTitleKey: 'rightTitle',
             itemIdKey: 'id',
             itemTitleKey: 'title',
             itemDivTitleKey: 'title',
@@ -89,8 +107,8 @@ export default function MembersTimeline() {
           }}
           defaultTimeStart={moment().add(-15, 'day')}
           defaultTimeEnd={moment().add(45, 'day')}
-          minZoom={24 * 60 * 60 * 1000} // Minimum zoom of 1 day
-          maxZoom={365.24 * 86400 * 1000} // Maximum zoom of ~1 year
+          minZoom={24 * 60 * 60 * 1000}
+          maxZoom={365.24 * 86400 * 1000}
           timeSteps={{
             second: 0,
             minute: 0,
@@ -99,19 +117,19 @@ export default function MembersTimeline() {
             month: 1,
             year: 1
           }}
-          formatLabel={formatDate} // Use custom date formatter
-          rightSidebarWidth={150}
-          rightSidebarContent="Status"
-          sidebarContent="Categories"
-          lineHeight={50}
+          formatLabel={formatDate}
+          sidebarWidth={sidebarWidth}
+          sidebarContent={window.innerWidth >= 640 ? "Categories" : ""}
+          lineHeight={window.innerWidth < 640 ? 40 : 50}
           itemRenderer={itemRender}
           canMove={true}
           canResize={'both'}
           onItemMove={handleItemMove}
           onItemResize={handleItemResize}
           stackItems
-          itemHeightRatio={0.75}
+          itemHeightRatio={window.innerWidth < 640 ? 0.85 : 0.75}
           showCursorLine
+          className="timeline-component"
         >
           <TimelineMarkers>
             <TodayMarker>

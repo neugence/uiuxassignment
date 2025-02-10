@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React from "react"
-import { useState, useMemo } from "react"
+import React, { useState, useMemo, useEffect } from "react"
 import { Button } from "../components/ui/button"
 import { MoreHorizontal, Plus, Trash2 } from "lucide-react"
 import { useTaskStore } from "../lib/store"
@@ -46,6 +45,28 @@ interface TaskManagerProps {
   filterType: string;
 }
 
+const useResponsiveColumnsPerPage = () => {
+  const [columnsPerPage, setColumnsPerPage] = useState(1);
+
+  useEffect(() => {
+    const updateColumnsPerPage = () => {
+      if (window.innerWidth >= 1024) { // lg breakpoint
+        setColumnsPerPage(3);
+      } else if (window.innerWidth >= 768) { // md breakpoint
+        setColumnsPerPage(2);
+      } else {
+        setColumnsPerPage(1);
+      }
+    };
+
+    updateColumnsPerPage();
+    window.addEventListener('resize', updateColumnsPerPage);
+    return () => window.removeEventListener('resize', updateColumnsPerPage);
+  }, []);
+
+  return columnsPerPage;
+};
+
 export default function TaskManager({ searchTerm, filterType }: TaskManagerProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedColumn, setSelectedColumn] = useState('')
@@ -61,7 +82,7 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
   const columns = useTaskStore((state) => state.columns)
   const addColumn = useTaskStore((state) => state.addColumn)
   const [currentPage, setCurrentPage] = useState(1)
-  const columnsPerPage = 3
+  const columnsPerPage = useResponsiveColumnsPerPage();
   const [isAddColumnModalOpen, setIsAddColumnModalOpen] = useState(false)
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const deleteColumn = useTaskStore((state) => state.deleteColumn);
@@ -196,7 +217,7 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {visibleColumns.map((column) => {
               let columnTasks = getTasksByStatus(column.id);
               columnTasks = getSortedTasks(columnTasks, columnSortOptions[column.id] || 'none');
@@ -248,7 +269,7 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
-                  <ScrollArea className="h-[calc(100vh-250px)]">
+                  <ScrollArea className="h-[calc(100vh-250px)] sm:h-[calc(100vh-200px)] lg:h-[calc(100vh-250px)]">
                     <div className="flex flex-col gap-2 pr-4">
                       <SortableContext
                         items={columnTasks.map(task => task.id)}
@@ -316,9 +337,9 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
       </div>
 
       {totalPages > 1 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border py-2">
+        <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border py-2 px-4">
           <Pagination>
-            <PaginationContent>
+            <PaginationContent className="flex flex-wrap justify-center gap-2">
               <PaginationItem>
                 <PaginationPrevious 
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
@@ -327,7 +348,7 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
                 />
               </PaginationItem>
               {Array.from({length: totalPages}).map((_, i) => (
-                <PaginationItem key={i}>
+                <PaginationItem key={i} className="hidden sm:block">
                   <PaginationLink
                     onClick={() => setCurrentPage(i + 1)}
                     isActive={currentPage === i + 1}
@@ -337,6 +358,11 @@ export default function TaskManager({ searchTerm, filterType }: TaskManagerProps
                   </PaginationLink>
                 </PaginationItem>
               ))}
+              <PaginationItem className="sm:hidden">
+                <span className="px-4 py-2 text-sm text-white">
+                  {currentPage} / {totalPages}
+                </span>
+              </PaginationItem>
               <PaginationItem>
                 <PaginationNext
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
