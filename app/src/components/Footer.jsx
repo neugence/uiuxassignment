@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-[#debc9c] to-[#a74444] p-12 flex justify-between items-center">
-      <div className="text-lg text-black">
+    <footer className="bg-gradient-to-b from-[#debc9c] to-[#a74444] p-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+      <div className="text-lg text-black mb-4 md:mb-0">
         <p>
           Harsh Wagh
           <br /> Pune, Maharashtra
@@ -12,7 +12,7 @@ const Footer = () => {
         </p>
       </div>
       <div>
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-6">
           <li>
             <a
               href="https://x.com/HarshWagh10"
