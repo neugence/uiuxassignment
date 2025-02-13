@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-base-200 p-4 bg-[url('/src/assets/bg.jpg')] bg-cover bg-center">
+      <div className="min-h-screen bg-base-200 p-4 bg-[url('https://images.pexels.com/photos/9941495/pexels-photo-9941495.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-center">
         <Header />
         <div className="container mx-auto mt-6">
           <div className="flex justify-center mb-4">
@@ -122,7 +122,7 @@ const App = () => {
           ) : (
             <div className="flex flex-col items-center justify-center text-center min-h-[70vh]">
               <svg
-                className="w-32 h-32 text-yellow-200 mb-4"
+                className="w-32 h-32 text-slate-700 mb-4"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
