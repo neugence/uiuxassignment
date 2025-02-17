@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+.grid-cols-31 {
+  grid-template-columns: repeat(31, minmax(100px, 1fr));
+}
+
+/* Add custom scrollbar styling */
+.timeline-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.timeline-scroll::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 3px;
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* Hide scrollbar but maintain functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Hide scrollbar but keep functionality */
+.overflow-x-auto {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent text selection while dragging */
+.cursor-grab {
+  user-select: none;
+}
+
+.timeline-container {
+  position: relative;
+  overflow: auto;
+}
+
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(31, 41, 55, 0.8);
+  backdrop-filter: blur(8px);
+}
