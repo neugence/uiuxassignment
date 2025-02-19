@@ -1,3 +1,6 @@
+## Hosted App Link
+🔗 [Task Manager](https://app-ten-tau-39.vercel.app/)
+
 # Neugence UI / UX Assignment
 
 1. Fork this Repo https://github.com/neugence/uiuxassignment
