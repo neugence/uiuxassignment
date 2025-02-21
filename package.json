@@ -4,11 +4,11 @@
   "description": "1. Fork this Repo https://github.com/neugence/uiuxassignment\r 2. Complete the assignment and host the app\r 3. Create a Pull request with hosted app link only (no code)\r 4. We will go into the code during interview\r    * We encourage you to use AI Tools for code writing\r    * We will go deep into the code to check your knowledge\r 5. Any questions (our developer will answer here), \r    * Discord Server: https://discord.gg/mW8xvN9qjx\r    * Channel : https://discord.com/channels/1281837569373503652/1335275549429334149",
   "main": "index.js",
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,5 +19,17 @@
     "react-icons": "^5.5.0",
     "uuid": "^11.1.0",
     "zustand": "^5.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
