@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import TaskList from './components/TaskList';
+import Pagination from './components/Pagination';
 import Footer from './components/Footer';
 import './styles.css';
 
@@ -12,6 +13,7 @@ const App = () => {
       <div className="content">
         <Sidebar />
         <TaskList />
+        <Pagination />
       </div>
       <Footer />
     </div>
