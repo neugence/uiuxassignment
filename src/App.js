@@ -1,12 +1,21 @@
 import React from 'react';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import TaskList from './components/TaskList';
+import Footer from './components/Footer';
+import './styles.css';
 
 const App = () => {
-    return (
-        <div>
-            <h1>Smart Task Manager</h1>
-            {/* Your components will go here */}
-        </div>
-    );
+  return (
+    <div className="app">
+      <Header />
+      <div className="content">
+        <Sidebar />
+        <TaskList />
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
 export default App;
