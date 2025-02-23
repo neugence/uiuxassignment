@@ -144,3 +144,18 @@ body {
     border-color: #6200ea;
   }
   
+  .task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .task.dragging {
+    background-color: #f0f0f0;
+  }

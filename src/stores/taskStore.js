@@ -42,6 +42,16 @@ const useTaskStore = create((set, get) => ({
   // Set the sorting criteria
   setSortBy: (sortBy) => set({ sortBy }),
 
+  // Reorder tasks
+  reorderTasks: (startIndex, endIndex) => {
+    set((state) => {
+      const tasks = [...state.tasks];
+      const [removed] = tasks.splice(startIndex, 1);
+      tasks.splice(endIndex, 0, removed);
+      return { tasks };
+    });
+  },
+
   // Get filtered and sorted tasks
   getFilteredAndSortedTasks: () => {
     const { tasks, filter, sortBy } = get();
