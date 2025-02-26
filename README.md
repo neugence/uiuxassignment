@@ -74,4 +74,4 @@ We will assess your work based on:
 ## 🎨 Why This Challenge?  
 This problem **mimics real-world UI/UX projects**, where **efficiency, interactivity, and user experience** are equally important. It will **help you grow** as a **UI/UX developer** while **showcasing your creativity**!  
 
-💡 **Get creative, keep the UI sleek, and make the app intuitive to use!** 🎨✨  
+💡 **Get creative, keep the UI sleek, and make the app intuitive to use!** 🎨✨   
