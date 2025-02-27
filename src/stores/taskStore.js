@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 
-const useTaskStore = create((set) => ({
+const useTaskStore = create((set, get) => ({
   tasks: [], // Array to store tasks
   currentPage: 1, // Current page number
   tasksPerPage: 5, // Number of tasks per page
   filter: 'all', // Current filter: 'all', 'completed', 'pending'
   sortBy: 'date', // Current sort: 'date', 'priority'
+  theme: 'light', // Current theme: 'light' or 'dark'
 
   // Add a new task
   addTask: (task) =>
@@ -41,6 +42,12 @@ const useTaskStore = create((set) => ({
 
   // Set the sorting criteria
   setSortBy: (sortBy) => set({ sortBy }),
+
+  // Toggle theme
+  toggleTheme: () =>
+    set((state) => ({
+      theme: state.theme === 'light' ? 'dark' : 'light',
+    })),
 
   // Reorder tasks
   reorderTasks: (startIndex, endIndex) => {

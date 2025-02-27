@@ -1,29 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useTaskStore from '../stores/taskStore';
+import { FaSun, FaMoon } from 'react-icons/fa'; // Icons for light/dark mode
 
 const Header = () => {
-  const [newTask, setNewTask] = useState('');
-  const { addTask } = useTaskStore();
-
-  const handleAddTask = () => {
-    if (newTask.trim()) {
-      addTask({ text: newTask });
-      setNewTask('');
-    }
-  };
+  const { theme, toggleTheme } = useTaskStore();
 
   return (
     <header className="header">
       <h1>Smart Task Manager</h1>
       <div>
-        <input
-          type="text"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          placeholder="Add a new task"
-        />
-        <button className="add-task-button" onClick={handleAddTask}>
-          + Add Task
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === 'light' ? <FaMoon /> : <FaSun />}
         </button>
       </div>
     </header>

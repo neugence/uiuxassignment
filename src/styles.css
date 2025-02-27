@@ -199,3 +199,61 @@ body {
   .task button:hover {
     background-color: #c60055;
   }
+
+  /* Light theme */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --header-bg-color: #6200ea;
+  --header-text-color: #ffffff;
+  --task-bg-color: #ffffff;
+  --task-border-color: #ddd;
+  --button-bg-color: #ff4081;
+  --button-text-color: #ffffff;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --header-bg-color: #1e1e1e;
+  --header-text-color: #ffffff;
+  --task-bg-color: #1e1e1e;
+  --task-border-color: #333;
+  --button-bg-color: #c60055;
+  --button-text-color: #ffffff;
+}
+
+/* Apply theme colors */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.header {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+}
+
+.task {
+  background-color: var(--task-bg-color);
+  border-color: var(--task-border-color);
+}
+
+.task button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--header-text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+  opacity: 0.8;
+}
