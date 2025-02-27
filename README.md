@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+=======
 # Neugence UI / UX Assignment
 
 1. Fork this Repo https://github.com/neugence/uiuxassignment
@@ -75,3 +85,4 @@ We will assess your work based on:
 This problem **mimics real-world UI/UX projects**, where **efficiency, interactivity, and user experience** are equally important. It will **help you grow** as a **UI/UX developer** while **showcasing your creativity**!  
 
 💡 **Get creative, keep the UI sleek, and make the app intuitive to use!** 🎨✨  
+>>>>>>> upstream/main
