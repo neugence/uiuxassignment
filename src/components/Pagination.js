@@ -7,6 +7,11 @@ const Pagination = () => {
   // Calculate the total number of pages
   const totalPages = Math.ceil(tasks.length / tasksPerPage);
 
+  // Don't render pagination if there are no tasks
+  if (tasks.length === 0) {
+    return null;
+  }
+
   return (
     <div className="pagination">
       <button onClick={prevPage} disabled={currentPage === 1}>

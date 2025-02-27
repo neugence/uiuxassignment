@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 
-const useTaskStore = create((set, get) => ({
+const useTaskStore = create((set) => ({
   tasks: [], // Array to store tasks
   currentPage: 1, // Current page number
   tasksPerPage: 5, // Number of tasks per page

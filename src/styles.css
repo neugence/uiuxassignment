@@ -73,6 +73,14 @@ body {
     border-radius: 4px;
   }
   
+  .task span {
+    flex: 1; /* Allow the task text to take up remaining space */
+    margin: 0 1rem; /* Add some spacing between text and buttons */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+  }
+
   .task button {
     margin-left: 0.5rem;
     padding: 0.25rem 0.5rem;
@@ -80,6 +88,7 @@ body {
     background-color: #ff4081;
     color: white;
     cursor: pointer;
+    border: 1px solid #ddd;
     border-radius: 4px;
   }
   
@@ -113,6 +122,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 1rem;
+    transition: opacity 0.3s ease-in-out;
   }
   
   .pagination button {
@@ -123,6 +133,7 @@ body {
     color: white;
     cursor: pointer;
     border-radius: 4px;
+    transition: background-color 0.2s ease;
   }
   
   .pagination button:disabled {
@@ -158,4 +169,33 @@ body {
   
   .task.dragging {
     background-color: #f0f0f0;
+  }
+
+  .task input[type="text"] {
+    flex: 1;
+    margin: 0 0.5rem;
+    padding: 0.25rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .task select {
+    margin: 0 0.5rem;
+    padding: 0.25rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .task button {
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    background-color: #ff4081;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .task button:hover {
+    background-color: #c60055;
   }
