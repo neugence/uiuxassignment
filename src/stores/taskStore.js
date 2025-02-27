@@ -12,7 +12,11 @@ const useTaskStore = create((set, get) => ({
   // Add a new task
   addTask: (task) =>
     set((state) => ({
-      tasks: [...state.tasks, { id: uuidv4(), ...task, completed: false }],
+      tasks: [...state.tasks, { 
+        id: uuidv4(), 
+        ...task, 
+        completed: false
+      }],
     })),
 
   // Edit a task

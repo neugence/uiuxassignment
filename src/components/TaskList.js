@@ -2,54 +2,94 @@ import React, { useState } from 'react';
 import useTaskStore from '../stores/taskStore';
 
 const TaskList = () => {
-  const { tasks, editTask, deleteTask, toggleTaskCompletion } = useTaskStore();
-  const [editingTaskId, setEditingTaskId] = useState(null);
-  const [editedText, setEditedText] = useState('');
-  const [editedPriority, setEditedPriority] = useState('');
+  const { tasks, addTask, deleteTask, editTask, toggleTaskCompletion } = useTaskStore();
+  const [newTaskText, setNewTaskText] = useState('');
+  const [editingTask, setEditingTask] = useState(null);
+  const [editingText, setEditingText] = useState('');
+  const [editingPriority, setEditingPriority] = useState('');
 
-  const handleEditClick = (task) => {
-    setEditingTaskId(task.id);
-    setEditedText(task.text);
-    setEditedPriority(task.priority || 'low'); // Default priority
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    if (newTaskText.trim()) {
+      addTask({ text: newTaskText });
+      setNewTaskText('');
+    }
   };
 
-  const handleSaveClick = (id) => {
-    editTask(id, { text: editedText, priority: editedPriority });
-    setEditingTaskId(null);
+  const handleStartEdit = (task) => {
+    setEditingTask(task.id);
+    setEditingText(task.text);
+    setEditingPriority(task.priority || '');
+  };
+
+  const handleSaveEdit = (id) => {
+    const updates = { text: editingText };
+    if (editingPriority) {
+      updates.priority = parseInt(editingPriority);
+    } else {
+      updates.priority = undefined;
+    }
+    editTask(id, updates);
+    setEditingTask(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTask(null);
   };
 
   return (
     <main className="task-list">
+      {/* Add New Task Form */}
+      <form onSubmit={handleAddTask} className="add-task-form">
+        <input
+          type="text"
+          value={newTaskText}
+          onChange={(e) => setNewTaskText(e.target.value)}
+          placeholder="Add a new task"
+          required
+        />
+        <button type="submit">Add Task</button>
+      </form>
+
+      {/* Task List */}
       {tasks.map((task) => (
         <div key={task.id} className="task">
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => toggleTaskCompletion(task.id)}
-          />
-          {editingTaskId === task.id ? (
-            <>
+          {editingTask === task.id ? (
+            <div className="edit-task-form">
               <input
                 type="text"
-                value={editedText}
-                onChange={(e) => setEditedText(e.target.value)}
+                value={editingText}
+                onChange={(e) => setEditingText(e.target.value)}
+                placeholder="Task text"
               />
               <select
-                value={editedPriority}
-                onChange={(e) => setEditedPriority(e.target.value)}
+                value={editingPriority}
+                onChange={(e) => setEditingPriority(e.target.value)}
               >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="">No Priority</option>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">High</option>
               </select>
-              <button onClick={() => handleSaveClick(task.id)}>Save</button>
-            </>
+              <button onClick={() => handleSaveEdit(task.id)}>Save</button>
+              <button onClick={handleCancelEdit}>Cancel</button>
+            </div>
           ) : (
             <>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => toggleTaskCompletion(task.id)}
+              />
               <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
-                {task.text} (Priority: {task.priority})
+                {task.text}
+                {task.priority && (
+                  <span className="priority-indicator">
+                    {' '}(Priority: {task.priority === 1 ? 'Low' : task.priority === 2 ? 'Medium' : 'High'})
+                  </span>
+                )}
               </span>
-              <button onClick={() => handleEditClick(task)}>Edit</button>
+              <button onClick={() => handleStartEdit(task)}>Edit</button>
               <button onClick={() => deleteTask(task.id)}>Delete</button>
             </>
           )}

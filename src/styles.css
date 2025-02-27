@@ -257,3 +257,52 @@ body {
 .theme-toggle:hover {
   opacity: 0.8;
 }
+
+.add-task-form {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.add-task-form input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+
+.add-task-form button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #6200ea;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-task-form button:hover {
+  background-color: #3700b3;
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  color: var(--header-text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.profile-button:hover {
+  opacity: 0.8;
+}
+.edit-task-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.priority-indicator {
+  font-size: 0.8em;
+  color: #666;
+}
