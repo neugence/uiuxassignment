@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
 import useTaskStore from '../stores/taskStore';
-import { FaSun, FaMoon, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa'; // Icons for profile dropdown
+import { FaSun, FaMoon, FaUser, FaCog, FaSignOutAlt, FaSearch } from 'react-icons/fa';
 
 const Header = () => {
-  const { theme, toggleTheme } = useTaskStore();
+  const { theme, toggleTheme, setSearchQuery } = useTaskStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchText, setSearchText] = useState('');
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLogout = () => {
-    // Add logout functionality here
-    alert('Logout clicked');
-  };
-
-  const handleSettings = () => {
-    // Add settings functionality here
-    alert('Settings clicked');
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+    setSearchQuery(e.target.value);
   };
 
   return (
     <header className="header">
       <h1>Smart Task Manager</h1>
       <div>
+        <div className="search-bar">
+          <FaSearch />
+          <input
+            type="text"
+            placeholder="Search tasks"
+            value={searchText}
+            onChange={handleSearch}
+          />
+        </div>
         <button className="theme-toggle" onClick={toggleTheme}>
           {theme === 'light' ? <FaMoon /> : <FaSun />}
         </button>
@@ -33,10 +38,10 @@ const Header = () => {
           </button>
           {isDropdownOpen && (
             <div className="profile-dropdown">
-              <button onClick={handleSettings}>
+              <button>
                 <FaCog /> Settings
               </button>
-              <button onClick={handleLogout}>
+              <button>
                 <FaSignOutAlt /> Logout
               </button>
             </div>

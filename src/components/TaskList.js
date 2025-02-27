@@ -16,10 +16,12 @@ const TaskList = () => {
     }
   };
 
+  // Starts editing a task by setting the editing state variables
+  // with the task's current values
   const handleStartEdit = (task) => {
-    setEditingTask(task.id);
-    setEditingText(task.text);
-    setEditingPriority(task.priority || '');
+    setEditingTask(task.id);      // Set which task is being edited
+    setEditingText(task.text);    // Set the initial edit text
+    setEditingPriority(task.priority || '');  // Set initial priority, empty string if none
   };
 
   const handleSaveEdit = (id) => {

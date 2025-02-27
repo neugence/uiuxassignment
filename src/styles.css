@@ -336,3 +336,24 @@ body {
 .profile-dropdown button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.search-bar input {
+  background: none;
+  border: none;
+  color: var(--header-text-color);
+  margin-left: 0.5rem;
+  outline: none;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
